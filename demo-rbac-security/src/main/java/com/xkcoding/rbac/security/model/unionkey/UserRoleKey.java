@@ -8,11 +8,12 @@ import java.io.Serializable;
 
 /**
  * <p>
- * 用户-角色联合主键
+ * User-Character Joint Primary Key
  * </p>
  *
- * @author yangkai.shen
+ * @author yangkai.shen, kevinnguyenai
  * @date Created in 2018-12-10 11:20
+ * @updateTime Updated in 2022-06-21 14:00
  */
 @Embeddable
 @Data
@@ -20,13 +21,13 @@ public class UserRoleKey implements Serializable {
     private static final long serialVersionUID = 5633412144183654743L;
 
     /**
-     * 用户id
+     * user id
      */
     @Column(name = "user_id")
     private Long userId;
 
     /**
-     * 角色id
+     * Role id
      */
     @Column(name = "role_id")
     private Long roleId;

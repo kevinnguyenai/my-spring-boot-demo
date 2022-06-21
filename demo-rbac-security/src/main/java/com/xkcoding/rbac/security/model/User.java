@@ -9,11 +9,12 @@ import javax.persistence.Table;
 
 /**
  * <p>
- * 用户
+ * user
  * </p>
  *
- * @author yangkai.shen
+ * @author yangkai.shen, kevinnguyenai
  * @date Created in 2018-12-07 16:00
+ * @updateTime Updated in 2022-06-21 14:00
  */
 @Data
 @Entity
@@ -21,59 +22,59 @@ import javax.persistence.Table;
 public class User {
 
     /**
-     * 主键
+     * Primary key
      */
     @Id
     private Long id;
 
     /**
-     * 用户名
+     * username
      */
     private String username;
 
     /**
-     * 密码
+     * password
      */
     private String password;
 
     /**
-     * 昵称
+     * Nick name
      */
     private String nickname;
 
     /**
-     * 手机
+     * cell phone
      */
     private String phone;
 
     /**
-     * 邮箱
+     * Mail
      */
     private String email;
 
     /**
-     * 生日
+     * Birthday
      */
     private Long birthday;
 
     /**
-     * 性别，男-1，女-2
+     * Gender, Male-1, Female-2
      */
     private Integer sex;
 
     /**
-     * 状态，启用-1，禁用-0
+     * Status, enable -1, disable -0
      */
     private Integer status;
 
     /**
-     * 创建时间
+     * Creation time
      */
     @Column(name = "create_time")
     private Long createTime;
 
     /**
-     * 更新时间
+     * Update time
      */
     @Column(name = "update_time")
     private Long updateTime;

@@ -18,11 +18,12 @@ import java.util.stream.Collectors;
 
 /**
  * <p>
- * 自定义UserDetails查询
+ * customize UserDetails Inquire
  * </p>
  *
- * @author yangkai.shen
+ * @author yangkai.shen, kevinnguyenai
  * @date Created in 2018-12-10 10:29
+ * @updateTime Updated in 2022-06-21 14:00
  */
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
@@ -37,7 +38,10 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String usernameOrEmailOrPhone) throws UsernameNotFoundException {
-        User user = userDao.findByUsernameOrEmailOrPhone(usernameOrEmailOrPhone, usernameOrEmailOrPhone, usernameOrEmailOrPhone).orElseThrow(() -> new UsernameNotFoundException("未找到用户信息 : " + usernameOrEmailOrPhone));
+        User user = userDao
+                .findByUsernameOrEmailOrPhone(usernameOrEmailOrPhone, usernameOrEmailOrPhone, usernameOrEmailOrPhone)
+                .orElseThrow(() -> new UsernameNotFoundException(
+                        "No user information is found : " + usernameOrEmailOrPhone));
         List<Role> roles = roleDao.selectByUserId(user.getId());
         List<Long> roleIds = roles.stream().map(Role::getId).collect(Collectors.toList());
         List<Permission> permissions = permissionDao.selectByRoleIdList(roleIds);

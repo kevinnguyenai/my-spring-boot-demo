@@ -4,21 +4,22 @@ import lombok.Data;
 
 /**
  * <p>
- * 分页请求参数
+ * Pagling request parameters
  * </p>
  *
- * @author yangkai.shen
+ * @author yangkai.shen, kevinnguyenai
  * @date Created in 2018-12-12 18:05
+ * @updateTime Updated in 2022-06-20 14:00
  */
 @Data
 public class PageCondition {
     /**
-     * 当前页码
+     * Current page number
      */
     private Integer currentPage;
 
     /**
-     * 每页条数
+     * Number per page
      */
     private Integer pageSize;
 

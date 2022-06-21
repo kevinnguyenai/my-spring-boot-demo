@@ -29,11 +29,12 @@ import java.util.Set;
 
 /**
  * <p>
- * Jwt 认证过滤器
+ * Jwt Certification filter
  * </p>
  *
- * @author yangkai.shen
+ * @author yangkai.shen, kevin.nguyen.ai
  * @date Created in 2018-12-10 15:15
+ * @updateTime Updated in 2022-06-20 14:00
  */
 @Component
 @Slf4j
@@ -48,7 +49,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private CustomConfig customConfig;
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+            throws ServletException, IOException {
 
         if (checkIgnores(request)) {
             filterChain.doFilter(request, response);
@@ -62,7 +64,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 String username = jwtUtil.getUsernameFromJWT(jwt);
 
                 UserDetails userDetails = customUserDetailsService.loadUserByUsername(username);
-                UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+                UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
+                        userDetails, null, userDetails.getAuthorities());
                 authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
                 SecurityContextHolder.getContext().setAuthentication(authentication);
@@ -77,10 +80,10 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     }
 
     /**
-     * 请求是否不需要进行权限拦截
+     * Whether the request does not require permissions interception
      *
-     * @param request 当前请求
-     * @return true - 忽略，false - 不忽略
+     * @param request Current request
+     * @return true - neglect，false - Not ignore
      */
     private boolean checkIgnores(HttpServletRequest request) {
         String method = request.getMethod();

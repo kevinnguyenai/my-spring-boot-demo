@@ -78,7 +78,7 @@ public class RedisUtil {
     }
 
     /**
-     * batch deletCertainRedis 中的某些key
+     * batch deletCertainRedis Certainkey
      *
      * @param keys Key list
      */

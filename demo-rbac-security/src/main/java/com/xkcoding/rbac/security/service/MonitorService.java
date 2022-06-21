@@ -19,11 +19,12 @@ import java.util.stream.Collectors;
 
 /**
  * <p>
- * 监控 Service
+ * monitor Service
  * </p>
  *
- * @author yangkai.shen
+ * @author yangkai.shen, kevinnguyenai
  * @date Created in 2018-12-12 00:55
+ * @updateTime Updated in 2022-06-21 14:00
  */
 @Slf4j
 @Service
@@ -35,22 +36,24 @@ public class MonitorService {
     private UserDao userDao;
 
     /**
-     * 在线用户分页列表
+     * Online user pagination list
      *
-     * @param pageCondition 分页参数
-     * @return 在线用户分页列表
+     * @param pageCondition Paging parameter
+     * @return Online user pagination list
      */
     public PageResult<OnlineUser> onlineUser(PageCondition pageCondition) {
-        PageResult<String> keys = redisUtil.findKeysForPage(Consts.REDIS_JWT_KEY_PREFIX + Consts.SYMBOL_STAR, pageCondition.getCurrentPage(), pageCondition.getPageSize());
+        PageResult<String> keys = redisUtil.findKeysForPage(Consts.REDIS_JWT_KEY_PREFIX + Consts.SYMBOL_STAR,
+                pageCondition.getCurrentPage(), pageCondition.getPageSize());
         List<String> rows = keys.getRows();
         Long total = keys.getTotal();
 
-        // 根据 redis 中键获取用户名列表
-        List<String> usernameList = rows.stream().map(s -> StrUtil.subAfter(s, Consts.REDIS_JWT_KEY_PREFIX, true)).collect(Collectors.toList());
-        // 根据用户名查询用户信息
+        // Obtain the user list according to the key in Redis
+        List<String> usernameList = rows.stream().map(s -> StrUtil.subAfter(s, Consts.REDIS_JWT_KEY_PREFIX, true))
+                .collect(Collectors.toList());
+        // Query user information according to the username
         List<User> userList = userDao.findByUsernameIn(usernameList);
 
-        // 封装在线用户信息
+        // Encourage online user information
         List<OnlineUser> onlineUserList = Lists.newArrayList();
         userList.forEach(user -> onlineUserList.add(OnlineUser.create(user)));
 
@@ -58,22 +61,26 @@ public class MonitorService {
     }
 
     /**
-     * 踢出在线用户
+     * Kick out online users
      *
-     * @param names 用户名列表
+     * @param names List
      */
     public void kickout(List<String> names) {
-        // 清除 Redis 中的 JWT 信息
-        List<String> redisKeys = names.parallelStream().map(s -> Consts.REDIS_JWT_KEY_PREFIX + s).collect(Collectors.toList());
+        // Remove Redis Moderate JWT information
+        List<String> redisKeys = names.parallelStream().map(s -> Consts.REDIS_JWT_KEY_PREFIX + s)
+                .collect(Collectors.toList());
         redisUtil.delete(redisKeys);
 
-        // 获取当前用户名
+        // Get the current username
         String currentUsername = SecurityUtil.getCurrentUsername();
         names.parallelStream().forEach(name -> {
-            // TODO: 通知被踢出的用户已被当前登录用户踢出，
-            //  后期考虑使用 websocket 实现，具体伪代码实现如下。
-            //  String message = "您已被用户【" + currentUsername + "】手动下线！";
-            log.debug("用户【{}】被用户【{}】手动下线！", name, currentUsername);
+            // TODO: The user who has been kicked out has been kicked by the current login
+            // user，
+            // Consider the use of WebSocket in the later period, and the specific pseudo
+            // code is achieved as follows。
+            // String message = "You have been used by users【" + currentUsername +
+            // "】Manually offline!";
+            log.debug("user【{}】User【{}ManuallyWire！", name, currentUsername);
         });
     }
 }

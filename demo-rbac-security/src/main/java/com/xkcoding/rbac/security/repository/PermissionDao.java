@@ -10,19 +10,20 @@ import java.util.List;
 
 /**
  * <p>
- * 权限 DAO
+ * Authority DAO
  * </p>
  *
- * @author yangkai.shen
+ * @author yangkai.shen, kevinnguyenai
  * @date Created in 2018-12-07 16:21
+ * @updateTime Updated in 2022-06-21 14:00
  */
 public interface PermissionDao extends JpaRepository<Permission, Long>, JpaSpecificationExecutor<Permission> {
 
     /**
-     * 根据角色列表查询权限列表
+     * List of query permissions according to the corner table
      *
-     * @param ids 角色id列表
-     * @return 权限列表
+     * @param ids Character ID list
+     * @return Permission list
      */
     @Query(value = "SELECT DISTINCT sec_permission.* FROM sec_permission,sec_role,sec_role_permission WHERE sec_role.id = sec_role_permission.role_id AND sec_permission.id = sec_role_permission.permission_id AND sec_role.id IN (:ids)", nativeQuery = true)
     List<Permission> selectByRoleIdList(@Param("ids") List<Long> ids);
