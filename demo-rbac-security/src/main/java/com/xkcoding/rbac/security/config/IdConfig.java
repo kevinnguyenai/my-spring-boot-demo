@@ -7,16 +7,17 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * <p>
- * 雪花主键生成器
+ * Snowflake main key generator
  * </p>
  *
- * @author yangkai.shen
+ * @author yangkai.shen, kevinnguyenai
  * @date Created in 2018-12-10 11:28
+ * @updateTime Updated in 2022-06-20 14:00
  */
 @Configuration
 public class IdConfig {
     /**
-     * 雪花生成器
+     * Snow plant
      */
     @Bean
     public Snowflake snowflake() {

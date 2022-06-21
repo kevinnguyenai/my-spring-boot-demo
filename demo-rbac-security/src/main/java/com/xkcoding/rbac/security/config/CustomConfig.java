@@ -5,17 +5,18 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
  * <p>
- * 自定义配置
+ * Custom configuration
  * </p>
  *
- * @author yangkai.shen
+ * @author yangkai.shen, kevinnguyenai
  * @date Created in 2018-12-13 10:56
+ * @updateTime Updated in 2022-06-20 14:00
  */
 @ConfigurationProperties(prefix = "custom.config")
 @Data
 public class CustomConfig {
     /**
-     * 不需要拦截的地址
+     * The address that does not need to be intercepted
      */
     private IgnoreConfig ignores;
 }

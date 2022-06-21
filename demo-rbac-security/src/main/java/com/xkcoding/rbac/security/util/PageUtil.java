@@ -8,25 +8,27 @@ import org.springframework.data.domain.PageRequest;
 
 /**
  * <p>
- * 分页工具类
+ * Paging tool
  * </p>
  *
- * @author yangkai.shen
+ * @author yangkai.shen, kevinnguyenai
  * @date Created in 2018-12-12 18:09
+ * @updateTime Updated in 2022-06-20 14:00
  */
 public class PageUtil {
     /**
-     * 校验分页参数，为NULL，设置分页参数默认值
+     * Check the pagination parameter, to NULL, set the default value of the
+     * pagination parameter
      *
-     * @param condition 查询参数
-     * @param clazz     类
+     * @param condition Query parameter
+     * @param clazz     kind
      * @param <T>       {@link PageCondition}
      */
     public static <T extends PageCondition> void checkPageCondition(T condition, Class<T> clazz) {
         if (ObjectUtil.isNull(condition)) {
             condition = ReflectUtil.newInstance(clazz);
         }
-        // 校验分页参数
+        // Check pagination parameter
         if (ObjectUtil.isNull(condition.getCurrentPage())) {
             condition.setCurrentPage(Consts.DEFAULT_CURRENT_PAGE);
         }
@@ -36,9 +38,9 @@ public class PageUtil {
     }
 
     /**
-     * 根据分页参数构建{@link PageRequest}
+     * Construction based on paging parameters{@link PageRequest}
      *
-     * @param condition 查询参数
+     * @param condition Query parameter
      * @param <T>       {@link PageCondition}
      * @return {@link PageRequest}
      */

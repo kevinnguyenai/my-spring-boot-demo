@@ -6,29 +6,30 @@ import javax.validation.constraints.NotBlank;
 
 /**
  * <p>
- * 登录请求参数
+ * Login request parameter
  * </p>
  *
- * @author yangkai.shen
+ * @author yangkai.shen, kevinnguyenai
  * @date Created in 2018-12-10 15:52
+ * @updateTime Updated in 2022-06-20 14:00
  */
 @Data
 public class LoginRequest {
 
     /**
-     * 用户名或邮箱或手机号
+     * Username or mailbox or mobile phone number
      */
-    @NotBlank(message = "用户名不能为空")
+    @NotBlank(message = "Username can not be empty")
     private String usernameOrEmailOrPhone;
 
     /**
-     * 密码
+     * password
      */
-    @NotBlank(message = "密码不能为空")
+    @NotBlank(message = "password can not be blank")
     private String password;
 
     /**
-     * 记住我
+     * remember me
      */
     private Boolean rememberMe = false;
 

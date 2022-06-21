@@ -18,11 +18,13 @@ import java.util.List;
 
 /**
  * <p>
- * 监控 Controller，在线用户，手动踢出用户等功能
+ * Surveillance Controller, online users, manually kick out users and other
+ * functions
  * </p>
  *
- * @author yangkai.shen
+ * @author yangkai.shen, kevinnguyenai
  * @date Created in 2018-12-11 20:55
+ * @updateTime Updated in 2022-06-20 14:00
  */
 @Slf4j
 @RestController
@@ -32,9 +34,9 @@ public class MonitorController {
     private MonitorService monitorService;
 
     /**
-     * 在线用户列表
+     * Online user list
      *
-     * @param pageCondition 分页参数
+     * @param pageCondition Paging parameter
      */
     @GetMapping("/online/user")
     public ApiResponse onlineUser(PageCondition pageCondition) {
@@ -44,9 +46,9 @@ public class MonitorController {
     }
 
     /**
-     * 批量踢出在线用户
+     * Batch kick out online users
      *
-     * @param names 用户名列表
+     * @param names List
      */
     @DeleteMapping("/online/user/kickout")
     public ApiResponse kickoutOnlineUser(@RequestBody List<String> names) {

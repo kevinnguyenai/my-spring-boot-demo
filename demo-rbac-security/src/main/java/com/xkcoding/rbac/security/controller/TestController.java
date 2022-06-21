@@ -6,11 +6,12 @@ import org.springframework.web.bind.annotation.*;
 
 /**
  * <p>
- * 测试Controller
+ * Test controller
  * </p>
  *
- * @author yangkai.shen
+ * @author yangkai.shen,kevinnguyenai
  * @date Created in 2018-12-10 15:44
+ * @updateTime Updated in 2022-06-20 14:00
  */
 @Slf4j
 @RestController
@@ -18,19 +19,19 @@ import org.springframework.web.bind.annotation.*;
 public class TestController {
     @GetMapping
     public ApiResponse list() {
-        log.info("测试列表查询");
-        return ApiResponse.ofMessage("测试列表查询");
+        log.info("Test list query");
+        return ApiResponse.ofMessage("Test list query");
     }
 
     @PostMapping
     public ApiResponse add() {
-        log.info("测试列表添加");
-        return ApiResponse.ofMessage("测试列表添加");
+        log.info("Test list add");
+        return ApiResponse.ofMessage("Test list add");
     }
 
     @PutMapping("/{id}")
     public ApiResponse update(@PathVariable Long id) {
-        log.info("测试列表修改");
-        return ApiResponse.ofSuccess("测试列表修改");
+        log.info("Test list modification");
+        return ApiResponse.ofSuccess("Test list modification");
     }
 }

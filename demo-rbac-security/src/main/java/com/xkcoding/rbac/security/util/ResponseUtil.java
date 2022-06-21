@@ -12,21 +12,22 @@ import java.io.IOException;
 
 /**
  * <p>
- * Response 通用工具类
+ * Response Universal tool
  * </p>
  *
- * @author yangkai.shen
+ * @author yangkai.shen,kevinnguyenai
  * @date Created in 2018-12-07 17:37
+ * @updateTime Updated in 2022-06-20 14:00
  */
 @Slf4j
 public class ResponseUtil {
 
     /**
-     * 往 response 写出 json
+     * Pastresponse Write json
      *
-     * @param response 响应
-     * @param status   状态
-     * @param data     返回数据
+     * @param response response
+     * @param status   state
+     * @param data     Return data
      */
     public static void renderJson(HttpServletResponse response, IStatus status, Object data) {
         try {
@@ -35,19 +36,20 @@ public class ResponseUtil {
             response.setContentType("application/json;charset=UTF-8");
             response.setStatus(200);
 
-            // FIXME: hutool 的 BUG：JSONUtil.toJsonStr()
-            //  将JSON转为String的时候，忽略null值的时候转成的String存在错误
+            // FIXME: hutool of BUG：JSONUtil.toJsonStr()
+            // When converting JSON to string, there is an error in the string converted
+            // when I ignore the NULL value
             response.getWriter().write(JSONUtil.toJsonStr(new JSONObject(ApiResponse.ofStatus(status, data), false)));
         } catch (IOException e) {
-            log.error("Response写出JSON异常，", e);
+            log.error("ResponseWriteJSON，", e);
         }
     }
 
     /**
-     * 往 response 写出 json
+     * Past response Write json
      *
-     * @param response  响应
-     * @param exception 异常
+     * @param response  response
+     * @param exception abnormal
      */
     public static void renderJson(HttpServletResponse response, BaseException exception) {
         try {
@@ -56,11 +58,12 @@ public class ResponseUtil {
             response.setContentType("application/json;charset=UTF-8");
             response.setStatus(200);
 
-            // FIXME: hutool 的 BUG：JSONUtil.toJsonStr()
-            //  将JSON转为String的时候，忽略null值的时候转成的String存在错误
+            // FIXME: hutool of BUG：JSONUtil.toJsonStr()
+            // WillJTurn toN转为StrinWhen g, conflictnullTurned when valueStringThere are
+            // errors
             response.getWriter().write(JSONUtil.toJsonStr(new JSONObject(ApiResponse.ofException(exception), false)));
         } catch (IOException e) {
-            log.error("Response写出JSON异常，", e);
+            log.error("ResponseWriteJSONabnormal，", e);
         }
     }
 }

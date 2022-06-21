@@ -22,11 +22,12 @@ import javax.validation.Valid;
 
 /**
  * <p>
- * 认证 Controller，包括用户注册，用户登录请求
+ * Certification Controller, including user registration, user login request
  * </p>
  *
- * @author yangkai.shen
+ * @author yangkai.shen, kevinnguyenai
  * @date Created in 2018-12-07 17:23
+ * @updateTime Updated in 2022-06-20 14:00
  */
 @Slf4j
 @RestController
@@ -40,11 +41,12 @@ public class AuthController {
     private JwtUtil jwtUtil;
 
     /**
-     * 登录
+     * Log in
      */
     @PostMapping("/login")
     public ApiResponse login(@Valid @RequestBody LoginRequest loginRequest) {
-        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsernameOrEmailOrPhone(), loginRequest.getPassword()));
+        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
+                loginRequest.getUsernameOrEmailOrPhone(), loginRequest.getPassword()));
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
@@ -55,7 +57,7 @@ public class AuthController {
     @PostMapping("/logout")
     public ApiResponse logout(HttpServletRequest request) {
         try {
-            // 设置JWT过期
+            // Set jwt expiration
             jwtUtil.invalidateJWT(request);
         } catch (SecurityException e) {
             throw new SecurityException(Status.UNAUTHORIZED);

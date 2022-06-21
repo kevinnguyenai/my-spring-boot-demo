@@ -2,59 +2,60 @@ package com.xkcoding.rbac.security.common;
 
 /**
  * <p>
- * 常量池
+ * Constant pool
  * </p>
  *
- * @author yangkai.shen
+ * @author yangkai.shen, kevinnguyenai
  * @date Created in 2018-12-10 15:03
+ * @updateTime Updated 2022-06-20 14:00
  */
 public interface Consts {
     /**
-     * 启用
+     * Open up
      */
     Integer ENABLE = 1;
     /**
-     * 禁用
+     * Disable
      */
     Integer DISABLE = 0;
 
     /**
-     * 页面
+     * page
      */
     Integer PAGE = 1;
 
     /**
-     * 按钮
+     * Button
      */
     Integer BUTTON = 2;
 
     /**
-     * JWT 在 Redis 中保存的key前缀
+     * JWT exist ReKey preserved in the preservedeyPrefix
      */
     String REDIS_JWT_KEY_PREFIX = "security:jwt:";
 
     /**
-     * 星号
+     * Asterisk
      */
     String SYMBOL_STAR = "*";
 
     /**
-     * 邮箱符号
+     * Email symbol
      */
     String SYMBOL_EMAIL = "@";
 
     /**
-     * 默认当前页码
+     * Default current page number
      */
     Integer DEFAULT_CURRENT_PAGE = 1;
 
     /**
-     * 默认每页条数
+     * Default number per page
      */
     Integer DEFAULT_PAGE_SIZE = 10;
 
     /**
-     * 匿名用户 用户名
+     * Anonymous user name
      */
-    String ANONYMOUS_NAME = "匿名用户";
+    String ANONYMOUS_NAME = "Anonymous User";
 }

@@ -17,11 +17,12 @@ import java.util.List;
 
 /**
  * <p>
- * Redis工具类
+ * RedisTools
  * </p>
  *
- * @author yangkai.shen
+ * @author yangkai.shen, kevinnguyenai
  * @date Created in 2018-12-11 20:24
+ * @updateTime Updated in 2022-06-20 14:00
  */
 @Component
 @Slf4j
@@ -30,12 +31,13 @@ public class RedisUtil {
     private StringRedisTemplate stringRedisTemplate;
 
     /**
-     * 分页获取指定格式key，使用 scan 命令代替 keys 命令，在大数据量的情况下可以提高查询效率
+     * Pagling to get the specified format key, use scan Command replace keys Order
+     * can improve query efficiency under the condition of large data volume
      *
-     * @param patternKey  key格式
-     * @param currentPage 当前页码
-     * @param pageSize    每页条数
-     * @return 分页获取指定格式key
+     * @param patternKey  keyFormat
+     * @param currentPage Current page number
+     * @param pageSize    Number per page
+     * @return Pagling obtain a specified format key
      */
     public PageResult<String> findKeysForPage(String patternKey, int currentPage, int pageSize) {
         ScanOptions options = ScanOptions.scanOptions().match(patternKey).build();
@@ -60,25 +62,25 @@ public class RedisUtil {
             cursor.close();
             RedisConnectionUtils.releaseConnection(rc, factory);
         } catch (Exception e) {
-            log.warn("Redis连接关闭异常，", e);
+            log.warn("RedisConnect to close abnormality，", e);
         }
 
         return new PageResult<>(result, tmpIndex);
     }
 
     /**
-     * 删除 Redis 中的某个key
+     * delete Redis One of the onekey
      *
-     * @param key 键
+     * @param key key
      */
     public void delete(String key) {
         stringRedisTemplate.delete(key);
     }
 
     /**
-     * 批量删除 Redis 中的某些key
+     * batch deletCertainRedis 中的某些key
      *
-     * @param keys 键列表
+     * @param keys Key list
      */
     public void delete(Collection<String> keys) {
         stringRedisTemplate.delete(keys);

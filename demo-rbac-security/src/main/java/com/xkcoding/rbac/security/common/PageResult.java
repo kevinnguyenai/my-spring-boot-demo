@@ -9,11 +9,12 @@ import java.util.List;
 
 /**
  * <p>
- * 通用分页参数返回
+ * GM pagination parameter returns
  * </p>
  *
- * @author yangkai.shen
+ * @author yangkai.shen, kevinnguyenai
  * @date Created in 2018-12-11 20:26
+ * @updateTime Updated in 2021-06-20 14:00
  */
 @Data
 @NoArgsConstructor
@@ -22,15 +23,22 @@ public class PageResult<T> implements Serializable {
     private static final long serialVersionUID = 3420391142991247367L;
 
     /**
-     * 当前页数据
+     * Current page data
      */
     private List<T> rows;
 
     /**
-     * 总条数
+     * Total number
      */
     private Long total;
 
+    /**
+     * 
+     * @param <T>
+     * @param rows
+     * @param total
+     * @return current Class Objects by type T of rows and totals
+     */
     public static <T> PageResult of(List<T> rows, Long total) {
         return new PageResult<>(rows, total);
     }

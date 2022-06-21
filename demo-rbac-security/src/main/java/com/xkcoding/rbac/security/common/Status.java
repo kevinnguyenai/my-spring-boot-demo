@@ -4,101 +4,104 @@ import lombok.Getter;
 
 /**
  * <p>
- * 通用状态码
+ * Universal status code
  * </p>
  *
- * @author yangkai.shen
+ * @author yangkai.shen , kevinnguyenai
  * @date Created in 2018-12-07 14:31
+ * @updateTime Updated in 2022-06-20 14:00
  */
 @Getter
 public enum Status implements IStatus {
     /**
-     * 操作成功！
+     * Successful operation!
      */
-    SUCCESS(200, "操作成功！"),
+    SUCCESS(200, "Successful operation！"),
 
     /**
-     * 操作异常！
+     * Abnormal operation！
      */
-    ERROR(500, "操作异常！"),
+    ERROR(500, "Abnormal operation！"),
 
     /**
-     * 退出成功！
+     * exit successfully！
      */
-    LOGOUT(200, "退出成功！"),
+    LOGOUT(200, "exit successfully！"),
 
     /**
-     * 请先登录！
+     * please log in first!
      */
-    UNAUTHORIZED(401, "请先登录！"),
+    UNAUTHORIZED(401, "please log in first！"),
 
     /**
-     * 暂无权限访问！
+     * There is no right to visit!
      */
-    ACCESS_DENIED(403, "权限不足！"),
+    ACCESS_DENIED(403, "Insufficient permissions！"),
 
     /**
-     * 请求不存在！
+     * The request does not exist!
      */
-    REQUEST_NOT_FOUND(404, "请求不存在！"),
+    REQUEST_NOT_FOUND(404, "The request does not exist！"),
 
     /**
-     * 请求方式不支持！
+     * The request method is not supported!
      */
-    HTTP_BAD_METHOD(405, "请求方式不支持！"),
+    HTTP_BAD_METHOD(405, "The request method does not support！"),
 
     /**
-     * 请求异常！
+     * Request abnormal!
      */
-    BAD_REQUEST(400, "请求异常！"),
+    BAD_REQUEST(400, "Request abnormalities！"),
 
     /**
-     * 参数不匹配！
+     * The parameters do not match!
      */
-    PARAM_NOT_MATCH(400, "参数不匹配！"),
+    PARAM_NOT_MATCH(400, "The parameter does not match！"),
 
     /**
-     * 参数不能为空！
+     * The parameters cannot be empty!
      */
-    PARAM_NOT_NULL(400, "参数不能为空！"),
+    PARAM_NOT_NULL(400, "Parameters cannot be empty！"),
 
     /**
-     * 当前用户已被锁定，请联系管理员解锁！
+     * The current user has been locked, please contact the administrator to unlock!
      */
-    USER_DISABLED(403, "当前用户已被锁定，请联系管理员解锁！"),
+    USER_DISABLED(403, "The current user has been locked, please contact the administrator to unlock！"),
 
     /**
-     * 用户名或密码错误！
+     * wrong user name or password!
      */
-    USERNAME_PASSWORD_ERROR(5001, "用户名或密码错误！"),
+    USERNAME_PASSWORD_ERROR(5001, "wrong user name or password！"),
 
     /**
-     * token 已过期，请重新登录！
+     * tokenExpired, please log in again!
      */
-    TOKEN_EXPIRED(5002, "token 已过期，请重新登录！"),
+    TOKEN_EXPIRED(5002, "token Expired, please log in again！"),
 
     /**
-     * token 解析失败，请尝试重新登录！
+     * tokenIf the analysis fails, try logging in again!
      */
-    TOKEN_PARSE_ERROR(5002, "token 解析失败，请尝试重新登录！"),
+    TOKEN_PARSE_ERROR(5002, "tokenIf the analysis fails, please try to log in again！"),
 
     /**
-     * 当前用户已在别处登录，请尝试更改密码或重新登录！
+     * The current user has logged in elsewhere, please try to change the password
+     * or log in again!
      */
-    TOKEN_OUT_OF_CTRL(5003, "当前用户已在别处登录，请尝试更改密码或重新登录！"),
+    TOKEN_OUT_OF_CTRL(5003,
+            "The current user has logged in elsewhere, please try to change the password or log in again！"),
 
     /**
-     * 无法手动踢出自己，请尝试退出登录操作！
+     * Can't kick yourself manually, try to quit login operation!
      */
-    KICKOUT_SELF(5004, "无法手动踢出自己，请尝试退出登录操作！");
+    KICKOUT_SELF(5004, "Can't kick yourself manually, try to quit login operation！");
 
     /**
-     * 状态码
+     * status code
      */
     private Integer code;
 
     /**
-     * 返回信息
+     * returned messages
      */
     private String message;
 

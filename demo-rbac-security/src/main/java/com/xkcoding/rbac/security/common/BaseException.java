@@ -5,11 +5,12 @@ import lombok.EqualsAndHashCode;
 
 /**
  * <p>
- * 异常基类
+ * Abnormal base
  * </p>
  *
- * @author yangkai.shen
+ * @author yangkai.shen, kevinnguyenai
  * @date Created in 2018-12-07 14:57
+ * @updateTime Updated in 2022-06-20 14:00
  */
 @EqualsAndHashCode(callSuper = true)
 @Data

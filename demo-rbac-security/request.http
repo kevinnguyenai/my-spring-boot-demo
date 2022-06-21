@@ -1,0 +1,50 @@
+@username=admin
+@password=123456
+@token=eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDcyODA2Mzc3NjYxMDA5OTIwIiwic3ViIjoiYWRtaW4iLCJpYXQiOjE2NTU3ODE5MzQsInJvbGVzIjpbIueuoeeQhuWRmCJdLCJhdXRob3JpdGllcyI6W3siYXV0aG9yaXR5IjoicGFnZTp0ZXN0In0seyJhdXRob3JpdHkiOiJidG46dGVzdDpxdWVyeSJ9LHsiYXV0aG9yaXR5IjoiYnRuOnRlc3Q6aW5zZXJ0In0seyJhdXRob3JpdHkiOiJwYWdlOm1vbml0b3I6b25saW5lIn0seyJhdXRob3JpdHkiOiJidG46bW9uaXRvcjpvbmxpbmU6cXVlcnkifSx7ImF1dGhvcml0eSI6ImJ0bjptb25pdG9yOm9ubGluZTpraWNrb3V0In1dLCJleHAiOjE2NTU3ODI1MzR9.PBUm1HF-BvpPXwq3_R4C1c-mi03PYGFZ5XfG_1MskFQ
+
+#### HEALTH
+GET http://localhost:3000/demo HTTP/1.1
+
+#### LOGIN
+POST http://localhost:3000/demo/api/auth/login HTTP/1.1
+Content-Type: application/json
+Accept: application/json
+
+{
+    "usernameOrEmailOrPhone": "{{username}}",
+    "password": "{{password}}"
+}
+
+
+
+
+#### LOGOUT
+POST http://localhost:3000/demo/api/auth/logout HTTP/1.1
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer {{token}}
+
+
+#### test/GET
+GET http://localhost:3000/demo/test
+Authorization: Bearer {{token}}
+
+#### test/POST
+POST http://localhost:3000/demo/test
+Authorization: Bearer {{token}}
+
+#### test/PUT
+PUT http://localhost:3000/demo/test/1072806377661009920
+Authorization: Bearer {{token}}
+
+#### test montior online user
+GET http://localhost:3000/demo/api/monitor/online/user HTTP/1.1
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer {{token}}
+
+#### test monitor online user kickout
+GET http://localhost:3000/demo/api/monitor/online/user/kickout HTTP/1.1
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer {{token}}
