@@ -21,11 +21,12 @@ import javax.validation.ConstraintViolationException;
 
 /**
  * <p>
- * 全局统一异常处理
+ * Global unified abnormal treatment
  * </p>
  *
- * @author yangkai.shen
+ * @author yangkai.shen, kevinnguyenai
  * @date Created in 2018-12-10 17:00
+ * @updateTime Updated in 2022-06-21 15:00:00
  */
 @ControllerAdvice
 @Slf4j
@@ -35,35 +36,47 @@ public class GlobalExceptionHandler {
     @ResponseBody
     public ApiResponse handlerException(Exception e) {
         if (e instanceof NoHandlerFoundException) {
-            log.error("【全局异常拦截】NoHandlerFoundException: 请求方法 {}, 请求路径 {}", ((NoHandlerFoundException) e).getRequestURL(), ((NoHandlerFoundException) e).getHttpMethod());
+            log.error("【Global abnormal interception】NoHandlerFoundException: Method of requesting {}, Request path {}",
+                    ((NoHandlerFoundException) e).getRequestURL(), ((NoHandlerFoundException) e).getHttpMethod());
             return ApiResponse.ofStatus(Status.REQUEST_NOT_FOUND);
         } else if (e instanceof HttpRequestMethodNotSupportedException) {
-            log.error("【全局异常拦截】HttpRequestMethodNotSupportedException: 当前请求方式 {}, 支持请求方式 {}", ((HttpRequestMethodNotSupportedException) e).getMethod(), JSONUtil.toJsonStr(((HttpRequestMethodNotSupportedException) e).getSupportedHttpMethods()));
+            log.error(
+                    "【Global abnormal interception】HttpRequestMethodNotSupportedException: Current request method {}, Support request method {}",
+                    ((HttpRequestMethodNotSupportedException) e).getMethod(),
+                    JSONUtil.toJsonStr(((HttpRequestMethodNotSupportedException) e).getSupportedHttpMethods()));
             return ApiResponse.ofStatus(Status.HTTP_BAD_METHOD);
         } else if (e instanceof MethodArgumentNotValidException) {
-            log.error("【全局异常拦截】MethodArgumentNotValidException", e);
-            return ApiResponse.of(Status.BAD_REQUEST.getCode(), ((MethodArgumentNotValidException) e).getBindingResult().getAllErrors().get(0).getDefaultMessage(), null);
+            log.error("【Global abnormal interception】MethodArgumentNotValidException", e);
+            return ApiResponse.of(Status.BAD_REQUEST.getCode(),
+                    ((MethodArgumentNotValidException) e).getBindingResult().getAllErrors().get(0).getDefaultMessage(),
+                    null);
         } else if (e instanceof ConstraintViolationException) {
-            log.error("【全局异常拦截】ConstraintViolationException", e);
-            return ApiResponse.of(Status.BAD_REQUEST.getCode(), CollUtil.getFirst(((ConstraintViolationException) e).getConstraintViolations()).getMessage(), null);
+            log.error("【Global abnormal interception】ConstraintViolationException", e);
+            return ApiResponse.of(Status.BAD_REQUEST.getCode(),
+                    CollUtil.getFirst(((ConstraintViolationException) e).getConstraintViolations()).getMessage(), null);
         } else if (e instanceof MethodArgumentTypeMismatchException) {
-            log.error("【全局异常拦截】MethodArgumentTypeMismatchException: 参数名 {}, 异常信息 {}", ((MethodArgumentTypeMismatchException) e).getName(), ((MethodArgumentTypeMismatchException) e).getMessage());
+            log.error(
+                    "【Global abnormal interception】MethodArgumentTypeMismatchException: parameter name {}, Abnormal information {}",
+                    ((MethodArgumentTypeMismatchException) e).getName(),
+                    ((MethodArgumentTypeMismatchException) e).getMessage());
             return ApiResponse.ofStatus(Status.PARAM_NOT_MATCH);
         } else if (e instanceof HttpMessageNotReadableException) {
-            log.error("【全局异常拦截】HttpMessageNotReadableException: 错误信息 {}", ((HttpMessageNotReadableException) e).getMessage());
+            log.error("【Global abnormal interception】HttpMessageNotReadableException: Error message {}",
+                    ((HttpMessageNotReadableException) e).getMessage());
             return ApiResponse.ofStatus(Status.PARAM_NOT_NULL);
         } else if (e instanceof BadCredentialsException) {
-            log.error("【全局异常拦截】BadCredentialsException: 错误信息 {}", e.getMessage());
+            log.error("【Global abnormal interception】BadCredentialsException: Error message {}", e.getMessage());
             return ApiResponse.ofStatus(Status.USERNAME_PASSWORD_ERROR);
         } else if (e instanceof DisabledException) {
-            log.error("【全局异常拦截】BadCredentialsException: 错误信息 {}", e.getMessage());
+            log.error("【Global abnormal interception】BadCredentialsException:Error message {}", e.getMessage());
             return ApiResponse.ofStatus(Status.USER_DISABLED);
         } else if (e instanceof BaseException) {
-            log.error("【全局异常拦截】DataManagerException: 状态码 {}, 异常信息 {}", ((BaseException) e).getCode(), e.getMessage());
+            log.error("【Global abnormal interception】DataManagerException: status code {}, Abnormal information {}",
+                    ((BaseException) e).getCode(), e.getMessage());
             return ApiResponse.ofException((BaseException) e);
         }
 
-        log.error("【全局异常拦截】: 异常信息 {} ", e.getMessage());
+        log.error("【Global abnormal interception】: Abnormal information {} ", e.getMessage());
         return ApiResponse.ofStatus(Status.ERROR);
     }
 }

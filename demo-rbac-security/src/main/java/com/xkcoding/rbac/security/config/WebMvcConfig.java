@@ -6,11 +6,12 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
  * <p>
- * MVC配置
+ * MVC Configuration
  * </p>
  *
- * @author yangkai.shen
+ * @author yangkai.shen, kevinnguyenai
  * @date Created in 2018-12-10 16:09
+ * @updateTime Updated in 2022-06-21 16:00:00
  */
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
@@ -19,6 +20,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**").allowedOrigins("*").allowedMethods("HEAD", "OPTIONS", "GET", "POST", "PUT", "PATCH", "DELETE").maxAge(MAX_AGE_SECS);
+        registry.addMapping("/**").allowedOrigins("*")
+                .allowedMethods("HEAD", "OPTIONS", "GET", "POST", "PUT", "PATCH", "DELETE").maxAge(MAX_AGE_SECS);
     }
 }

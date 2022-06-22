@@ -8,18 +8,20 @@ import org.springframework.security.web.access.AccessDeniedHandler;
 
 /**
  * <p>
- * Security 结果处理配置
+ * Security Result processing configuration
  * </p>
  *
- * @author yangkai.shen
+ * @author yangkai.shen, kevinnguyenai
  * @date Created in 2018-12-07 17:31
+ * @updateTime Updated in 2022-06-14 15:00
  */
 @Configuration
 public class SecurityHandlerConfig {
 
     @Bean
     public AccessDeniedHandler accessDeniedHandler() {
-        return (request, response, accessDeniedException) -> ResponseUtil.renderJson(response, Status.ACCESS_DENIED, null);
+        return (request, response, accessDeniedException) -> ResponseUtil.renderJson(response, Status.ACCESS_DENIED,
+                null);
     }
 
 }

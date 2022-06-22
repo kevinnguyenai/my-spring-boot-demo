@@ -1,35 +1,34 @@
 # spring-boot-demo-rbac-security
 
-> 此 demo 主要演示了 Spring Boot 项目如何集成 Spring Security 完成权限拦截操作。本 demo 为基于**前后端分离**的后端权限管理部分，不同于其他博客里使用的模板技术，希望对大家有所帮助。
+> This DEMO mainly demonstrates how the Spring Boot project integrates Spring Security to complete the permission interception operation. This DEMO is the back -end authority management part based on the front and rear end of **, which is different from the template technology used in other blogs. I hope it will be helpful to everyone.
 
-## 1. 主要功能
+## 1. Main features
 
-- [x] 基于 `RBAC` 权限模型设计，详情参考数据库表结构设计 [`security.sql`](./sql/security.sql)
-- [x] 支持**动态权限管理**，详情参考 [`RbacAuthorityService.java`](./src/main/java/com/xkcoding/rbac/security/config/RbacAuthorityService.java)
-- [x] **登录 / 登出**部分均使用自定义 Controller 实现，未使用 `Spring Security` 内部默认的实现，适用于前后端分离项目，详情参考 [`SecurityConfig.java`](./src/main/java/com/xkcoding/rbac/security/config/SecurityConfig.java) 和 [`AuthController.java`](./src/main/java/com/xkcoding/rbac/security/controller/AuthController.java)
-- [x] 持久化技术使用 `spring-data-jpa` 完成
-- [x] 使用 `JWT` 实现安全验证，同时引入 `Redis` 解决 `JWT` 无法手动设置过期的弊端，并且保证同一用户在同一时间仅支持同一设备登录，不同设备登录会将，详情参考 [`JwtUtil.java`](./src/main/java/com/xkcoding/rbac/security/util/JwtUtil.java)
-- [x] 在线人数统计，详情参考 [`MonitorService.java`](./src/main/java/com/xkcoding/rbac/security/service/MonitorService.java) 和 [`RedisUtil.java`](./src/main/java/com/xkcoding/rbac/security/util/RedisUtil.java)
-- [x] 手动踢出用户，详情参考 [`MonitorService.java`](./src/main/java/com/xkcoding/rbac/security/service/MonitorService.java)
-- [x] 自定义配置不需要进行拦截的请求，详情参考 [`CustomConfig.java`](./src/main/java/com/xkcoding/rbac/security/config/CustomConfig.java) 和 [`application.yml`](./src/main/resources/application.yml)
+- [X] Based on the design of the `rbac` permissions model, details refer to the database table structure design [` security.sql`] (./ SQL/Security.sql)
+- [X] Support ** dynamic permissions management **, please refer to [`` rbacAuthorityService.java`] (./ SRC/Main/Java/COM/XKCODING/RBAC/Security/Config/RBacAutHorvice.java)
+- [X] ** Login/ Login ** Partially uses custom controller implementation, without using the default implementation of the `Spring Security`, suitable for the front and back -end separation items. For details, please refer to [` SecurityConfig.java`] (././ src/main/java/com/xkcoding/rbac/security/config/SecurityConfig.java) 和[`AuthController.java`](./src/main/java/com/xkcoding/rbac/security/controller/AuthController.java Cure
+-[X] Prespective technology uses `Spring-Data-JPA` to complete
+- [X] Use `jwt` to implement security verification, and introduce` redis` to solve the disadvantages of expiration of expiration, and ensure that the same user only supports the same device login at the same time, and the login will be available in different equipment. For details, please refer to [ `Jwtutil.java`] (./ src/main/java/com/xkcoding/rbac/security/util/jwtutil.java)
+- [X] Online number statistics, details Reference [`Monitorservice.java`] (./ SRC/Main/Java/COM/XKCODING/RBAC/Security/Service/Monitorservice.java) and [` Redisutil.java`]]] /src/main/java/com/xkcoding/Rbac/Security/Util/redisutil.java)
+- [X] Manually kick out the user, details refer to [`Monitorservice.java`] (./ SRC/Main/Java/COM/XKCODING/RBAC/Security/Service/Monitorservice.java)
+- [X] Custom configuration does not require interception requests, details refer to [`Customconfig.java`] (./ SRC/Main/Java/COM/XKCODING/RBAC/Config/CustomConfig.java) and [` Application .yml`] (./ src/main/resources/application.yml)
 
-## 2. 运行
+## 2. Run 
 
-### 2.1. 环境
+ ### 2.1. Environment 
+ 1. JDK 1.8 or higher 
+  2. Maven 3.5 or higher 
+  3. MySQL 5.7 or higher 
+  4. Redis
 
-1. JDK 1.8 以上
-2. Maven 3.5 以上
-3. Mysql 5.7 以上
-4. Redis
+### 2.2. 
 
-### 2.2. 运行方式
-
-1. 新建一个名为 `spring-boot-demo` 的数据库，字符集设置为 `utf-8`，如果数据库名不是 `spring-boot-demo` 需要在 `application.yml` 中修改 `spring.datasource.url`
-2. 使用 [`security.sql`](./sql/security.sql) 这个 SQL 文件，创建数据库表和初始化RBAC数据
-3. 运行 `SpringBootDemoRbacSecurityApplication`
-4. 管理员账号：admin/123456 普通用户：user/123456
-5. 使用 `POST` 请求访问 `/${contextPath}/api/auth/login` 端点，输入账号密码，登陆成功之后返回token，将获得的 token 放在具体请求的 Header 里，key 固定是 `Authorization` ，value 前缀为 `Bearer 后面加空格`再加token，并加上具体请求的参数，就可以了
-6. enjoy ~​ :kissing_smiling_eyes:
+ 1. Create a database called `spring-boot-design. The character set is set to` UTF-8`. .url` 
+ 2. Use [`security.sql`] (./ SQL/Security.sql) This SQL file, create a database table and initialize RBAC data 
+ 3. Run `SpringBootDemorbacSecurityApplication` 
+ 4. Administrator account number: admin/123456 Ordinary user: User/123456 
+ 5. Use the `post` request to access`/$ {contextpath}/api/auth/login` endpoint, enter the account password, return to the token after logging in, place the obtained token in the specific request. `, Value prefix is` Bearer, add a space behind `plus token, and add the parameters of specific requests, just 
+ 6. enjoy ~: kissing_smiling_eyes:
 
 ## 3. 部分关键代码
 
@@ -82,7 +81,7 @@
             <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
 
-        <!-- 对象池，使用redis时必须引入 -->
+       <!-Object pool, you must introduce when using redis->
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-pool2</artifactId>
@@ -138,17 +137,10 @@
 
 ### 3.2. JwtUtil.java
 
-> JWT 工具类，主要功能：生成JWT并存入Redis、解析JWT并校验其准确性、从Request的Header中获取JWT
+> JWT tool class, the main function: generate JWT coexistence in redis, analyze JWT and verify its accuracy, get JWT from the Header of Request
 
 ```java
-/**
- * <p>
- * JWT 工具类
- * </p>
- *
- * @author yangkai.shen
- * @date Created in 2018-12-07 13:42
- */
+
 @EnableConfigurationProperties(JwtConfig.class)
 @Configuration
 @Slf4j
@@ -159,16 +151,16 @@ public class JwtUtil {
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
 
-    /**
-     * 创建JWT
-     *
-     * @param rememberMe  记住我
-     * @param id          用户id
-     * @param subject     用户名
-     * @param roles       用户角色
-     * @param authorities 用户权限
-     * @return JWT
-     */
+     /** 
+      * Create JWT 
+      * 
+      * @param rememberme remember me 
+      * @param ID user ID 
+      * @param Subject username 
+      * @param ROLES user role 
+      * @param Authorities user permission 
+      * @Return jwt 
+      */
     public String createJWT(Boolean rememberMe, Long id, String subject, List<String> roles, Collection<? extends GrantedAuthority> authorities) {
         Date now = new Date();
         JwtBuilder builder = Jwts.builder()
@@ -178,38 +170,37 @@ public class JwtUtil {
                 .signWith(SignatureAlgorithm.HS256, jwtConfig.getKey())
                 .claim("roles", roles)
                 .claim("authorities", authorities);
+        // Set the expiration time 
+         Long ttl = rememberme? Jwtconfig.getremember (): jwtconfig.getttl (); 
+         if (ttl> 0) {{ 
+             Builder.Setexpiration (dateutil.offsetmilliseCond (now, ttl.intvalue ())); 
+         } 
 
-        // 设置过期时间
-        Long ttl = rememberMe ? jwtConfig.getRemember() : jwtConfig.getTtl();
-        if (ttl > 0) {
-            builder.setExpiration(DateUtil.offsetMillisecond(now, ttl.intValue()));
-        }
-
-        String jwt = builder.compact();
-        // 将生成的JWT保存至Redis
-        stringRedisTemplate.opsForValue()
-                .set(Consts.REDIS_JWT_KEY_PREFIX + subject, jwt, ttl, TimeUnit.MILLISECONDS);
-        return jwt;
+         String jwt = builder.compact (); 
+         // Save the generated JWT to Redis 
+         StringRedistemPlate.Opsforvalue () 
+                 .sets.redis_jwt_key_prefix + Subject, JWT, TTL, Timeunit.milliseConds); 
+         Return jwt;
     }
 
-    /**
-     * 创建JWT
-     *
-     * @param authentication 用户认证信息
-     * @param rememberMe     记住我
-     * @return JWT
-     */
+     /** 
+      * Create JWT 
+      * 
+      * @param authentication user certification information 
+      * @param rememberme remember me 
+      * @Return jwt 
+      */
     public String createJWT(Authentication authentication, Boolean rememberMe) {
         UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
         return createJWT(rememberMe, userPrincipal.getId(), userPrincipal.getUsername(), userPrincipal.getRoles(), userPrincipal.getAuthorities());
     }
 
-    /**
-     * 解析JWT
-     *
-     * @param jwt JWT
-     * @return {@link Claims}
-     */
+     /** 
+      *analyzeJWT 
+      * 
+      * @param JWT JWT 
+      * @return {@link class} 
+      *//
     public Claims parseJWT(String jwt) {
         try {
             Claims claims = Jwts.parser()
@@ -220,13 +211,13 @@ public class JwtUtil {
             String username = claims.getSubject();
             String redisKey = Consts.REDIS_JWT_KEY_PREFIX + username;
 
-            // 校验redis中的JWT是否存在
+            // Whether the JWT in Redis exists
             Long expire = stringRedisTemplate.getExpire(redisKey, TimeUnit.MILLISECONDS);
             if (Objects.isNull(expire) || expire <= 0) {
                 throw new SecurityException(Status.TOKEN_EXPIRED);
             }
 
-            // 校验redis中的JWT是否与当前的一致，不一致则代表用户已注销/用户在不同设备登录，均代表JWT已过期
+            // Whether the JWT in the Redis is consistent with the current, inconsistency means that the user has canceled it/users log in at different devices. They all represent that the JWT has expired
             String redisToken = stringRedisTemplate.opsForValue()
                     .get(redisKey);
             if (!StrUtil.equals(jwt, redisToken)) {
@@ -234,52 +225,52 @@ public class JwtUtil {
             }
             return claims;
         } catch (ExpiredJwtException e) {
-            log.error("Token 已过期");
+            log.error("Token expired");
             throw new SecurityException(Status.TOKEN_EXPIRED);
         } catch (UnsupportedJwtException e) {
-            log.error("不支持的 Token");
+            log.error("Unsupported Token");
             throw new SecurityException(Status.TOKEN_PARSE_ERROR);
         } catch (MalformedJwtException e) {
-            log.error("Token 无效");
+            log.error("Token invalid");
             throw new SecurityException(Status.TOKEN_PARSE_ERROR);
         } catch (SignatureException e) {
-            log.error("无效的 Token 签名");
+            log.error("Effective token signature");
             throw new SecurityException(Status.TOKEN_PARSE_ERROR);
         } catch (IllegalArgumentException e) {
-            log.error("Token 参数不存在");
+            log.error("Token Parameters do not exist");
             throw new SecurityException(Status.TOKEN_PARSE_ERROR);
         }
     }
 
     /**
-     * 设置JWT过期
-     *
-     * @param request 请求
+      * Set jwt expiration 
+      * 
+      * @param Request request
      */
     public void invalidateJWT(HttpServletRequest request) {
         String jwt = getJwtFromRequest(request);
         String username = getUsernameFromJWT(jwt);
-        // 从redis中清除JWT
+        // Clear JWT from Redis
         stringRedisTemplate.delete(Consts.REDIS_JWT_KEY_PREFIX + username);
     }
 
-    /**
-     * 根据 jwt 获取用户名
-     *
-     * @param jwt JWT
-     * @return 用户名
-     */
+    /** 
+      * Get the username according to JWT 
+      * 
+      * @param jwt jwt 
+      * @Return Username 
+      */
     public String getUsernameFromJWT(String jwt) {
         Claims claims = parseJWT(jwt);
         return claims.getSubject();
     }
 
-    /**
-     * 从 request 的 header 中获取 JWT
-     *
-     * @param request 请求
-     * @return JWT
-     */
+    /** 
+      * Get jwt from the Header of Request 
+      * 
+      * @param Request request 
+      * @Return jwt 
+      */
     public String getJwtFromRequest(HttpServletRequest request) {
         String bearerToken = request.getHeader("Authorization");
         if (StrUtil.isNotBlank(bearerToken) && bearerToken.startsWith("Bearer ")) {
@@ -296,14 +287,7 @@ public class JwtUtil {
 > Spring Security 配置类，主要功能：配置哪些URL不需要认证，哪些需要认证
 
 ```java
-/**
- * <p>
- * Security 配置
- * </p>
- *
- * @author yangkai.shen
- * @date Created in 2018-12-07 16:46
- */
+
 @Configuration
 @EnableWebSecurity
 @EnableConfigurationProperties(CustomConfig.class)
@@ -341,48 +325,48 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.cors()
 
-                // 关闭 CSRF
+                // Close CSRF
                 .and()
                 .csrf()
                 .disable()
 
-                // 登录行为由自己实现，参考 AuthController#login
+                // Login behavior, refer to AuthController#login
                 .formLogin()
                 .disable()
                 .httpBasic()
                 .disable()
 
-                // 认证请求
+                // Certification request
                 .authorizeRequests()
                 // 所有请求都需要登录访问
                 .anyRequest()
                 .authenticated()
-                // RBAC 动态 url 认证
+                // RBAC dynamic URL certification
                 .anyRequest()
                 .access("@rbacAuthorityService.hasPermission(request,authentication)")
 
-                // 登出行为由自己实现，参考 AuthController#logout
+                // Realize by yourself, refer to AuthController#logout
                 .and()
                 .logout()
                 .disable()
 
-                // Session 管理
+                // Session management
                 .sessionManagement()
-                // 因为使用了JWT，所以这里不管理Session
+                // Because you have used jwt, you do not manage the session here
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 
-                // 异常处理
+                // Abnormal treatment
                 .and()
                 .exceptionHandling()
                 .accessDeniedHandler(accessDeniedHandler);
 
-        // 添加自定义 JWT 过滤器
+        // Add custom JWT filter
         http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
     }
 
     /**
-     * 放行所有不需要登录就可以访问的请求，参见 AuthController
-     * 也可以在 {@link #configure(HttpSecurity)} 中配置
+     * Play all requests that can be accessed without logging in, see AuthController
+     * You can also configure in {@Link #Configure (httpsecurity)}
      * {@code http.authorizeRequests().antMatchers("/api/auth/**").permitAll()}
      */
     @Override
@@ -390,55 +374,55 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         WebSecurity and = web.ignoring()
                 .and();
 
-        // 忽略 GET
+        // Ignore get
         customConfig.getIgnores()
                 .getGet()
                 .forEach(url -> and.ignoring()
                         .antMatchers(HttpMethod.GET, url));
 
-        // 忽略 POST
+        // Ignore post
         customConfig.getIgnores()
                 .getPost()
                 .forEach(url -> and.ignoring()
                         .antMatchers(HttpMethod.POST, url));
 
-        // 忽略 DELETE
+        // Ignore delete
         customConfig.getIgnores()
                 .getDelete()
                 .forEach(url -> and.ignoring()
                         .antMatchers(HttpMethod.DELETE, url));
 
-        // 忽略 PUT
+        // Ignore put
         customConfig.getIgnores()
                 .getPut()
                 .forEach(url -> and.ignoring()
                         .antMatchers(HttpMethod.PUT, url));
 
-        // 忽略 HEAD
+        // Ign
         customConfig.getIgnores()
                 .getHead()
                 .forEach(url -> and.ignoring()
                         .antMatchers(HttpMethod.HEAD, url));
 
-        // 忽略 PATCH
+        // Ignore patch
         customConfig.getIgnores()
                 .getPatch()
                 .forEach(url -> and.ignoring()
                         .antMatchers(HttpMethod.PATCH, url));
 
-        // 忽略 OPTIONS
+        // Ignore Options
         customConfig.getIgnores()
                 .getOptions()
                 .forEach(url -> and.ignoring()
                         .antMatchers(HttpMethod.OPTIONS, url));
 
-        // 忽略 TRACE
+        // Ignore trace trace
         customConfig.getIgnores()
                 .getTrace()
                 .forEach(url -> and.ignoring()
                         .antMatchers(HttpMethod.TRACE, url));
 
-        // 按照请求格式忽略
+        // Councing according to the request format
         customConfig.getIgnores()
                 .getPattern()
                 .forEach(url -> and.ignoring()
@@ -450,20 +434,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 ### 3.4. RbacAuthorityService.java
 
-> 路由动态鉴权类，主要功能：
->
-> 1. 校验请求的合法性，排除404和405这两种异常请求
-> 2. 根据当前请求路径与该用户可访问的资源做匹配，通过则可以访问，否则，不允许访问
+> Routing dynamic authentication category, the main function: 
+ Forecast 
+ > 1. Check the legitimacy of requests, exclude the two abnormal requests of 404 and 405 
+ > 2. Matching the resource that the user can access according to the current request path, you can access it through the pass, otherwise, you will not be allowed to access
 
 ```java
-/**
- * <p>
- * 动态路由认证
- * </p>
- *
- * @author yangkai.shen
- * @date Created in 2018-12-10 17:17
- */
+
 @Component
 public class RbacAuthorityService {
     @Autowired
@@ -491,13 +468,13 @@ public class RbacAuthorityService {
                     .collect(Collectors.toList());
             List<Permission> permissions = permissionDao.selectByRoleIdList(roleIds);
 
-            //获取资源，前后端分离，所以过滤页面权限，只保留按钮权限
+            //Obtain resources, separate the front and rear end, so the filtering page is right, only the button permissions are retained
             List<Permission> btnPerms = permissions.stream()
-                    // 过滤页面权限
+                    // Filter page Facial permanent
                     .filter(permission -> Objects.equals(permission.getType(), Consts.BUTTON))
-                    // 过滤 URL 为空
+                    // Filter URL to empty
                     .filter(permission -> StrUtil.isNotBlank(permission.getUrl()))
-                    // 过滤 METHOD 为空
+                    //Filtering Method is empty
                     .filter(permission -> StrUtil.isNotBlank(permission.getMethod()))
                     .collect(Collectors.toList());
 
@@ -515,21 +492,21 @@ public class RbacAuthorityService {
         }
     }
 
-    /**
-     * 校验请求是否存在
-     *
-     * @param request 请求
-     */
+      /** 
+      * Whether the request exists 
+      * 
+      * @param Request request 
+      */
     private void checkRequest(HttpServletRequest request) {
-        // 获取当前 request 的方法
+        // The method of getting the current request
         String currentMethod = request.getMethod();
         Multimap<String, String> urlMapping = allUrlMapping();
 
         for (String uri : urlMapping.keySet()) {
-            // 通过 AntPathRequestMatcher 匹配 url
-            // 可以通过 2 种方式创建 AntPathRequestMatcher
-            // 1：new AntPathRequestMatcher(uri,method) 这种方式可以直接判断方法是否匹配，因为这里我们把 方法不匹配 自定义抛出，所以，我们使用第2种方式创建
-            // 2：new AntPathRequestMatcher(uri) 这种方式不校验请求方法，只校验请求路径
+             // Match URL through AntpathRequestMatcher 
+             // You can create AntpathRequestMatcher in two ways 
+             // 1: New AntpathRequestMatcher (URI, Method) This method can directly determine whether the method is matched, because we do not match the method and throw it out, so we use the second way to create the second way to create 
+             // 2: New AntpathRequestMatcher (URI) This method does not check the request method, only checks the request path
             AntPathRequestMatcher antPathMatcher = new AntPathRequestMatcher(uri);
             if (antPathMatcher.matches(request)) {
                 if (!urlMapping.get(uri)
@@ -542,26 +519,25 @@ public class RbacAuthorityService {
         }
 
         throw new SecurityException(Status.REQUEST_NOT_FOUND);
-    }
+} 
 
-    /**
-     * 获取 所有URL Mapping，返回格式为{"/test":["GET","POST"],"/sys":["GET","DELETE"]}
-     *
-     * @return {@link ArrayListMultimap} 格式的 URL Mapping
+     /** 
+      * Get all URL MAPPING, return the format to {"/test": ["get", "post"], "/sys": ["get", "delete"]} 
+      * 
+      * @Return {@Link ArrayListMultimap} The URL MAPPING in the format
      */
     private Multimap<String, String> allUrlMapping() {
         Multimap<String, String> urlMapping = ArrayListMultimap.create();
-
-        // 获取url与类和方法的对应信息
+        // Get the corresponding information of the URL and the class and methods
         Map<RequestMappingInfo, HandlerMethod> handlerMethods = mapping.getHandlerMethods();
 
         handlerMethods.forEach((k, v) -> {
             // 获取当前 key 下的获取所有URL
-            Set<String> url = k.getPatternsCondition()
+            SeGet all the URLs under the current keyetPatternsCondition()
                     .getPatterns();
             RequestMethodsRequestCondition method = k.getMethodsCondition();
 
-            // 为每个URL添加所有的请求方法
+           // Add all the request methods to each url
             url.forEach(s -> urlMapping.putAll(s, method.getMethods()
                     .stream()
                     .map(Enum::toString)
@@ -575,20 +551,13 @@ public class RbacAuthorityService {
 
 ### 3.5. JwtAuthenticationFilter.java
 
-> JWT 认证过滤器，主要功能：
->
-> 1. 过滤不需要拦截的请求
-> 2. 根据当前请求的JWT，认证用户身份信息
+> JWT certification filter, the main function: 
+ Forecast 
+ > 1. Filter the request that does not need to be intercepted 
+ > 2. According to the current request JWT, authentication user identity information
 
 ```java
-/**
- * <p>
- * Jwt 认证过滤器
- * </p>
- *
- * @author yangkai.shen
- * @date Created in 2018-12-10 15:15
- */
+
 @Component
 @Slf4j
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
@@ -632,10 +601,10 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     }
 
     /**
-     * 请求是否不需要进行权限拦截
-     *
-     * @param request 当前请求
-     * @return true - 忽略，false - 不忽略
+* Whether the request does not require permission interception 
+      * 
+      * @param Request Current Request 
+      * @Return true -ignore, false -not ignored
      */
     private boolean checkIgnores(HttpServletRequest request) {
         String method = request.getMethod();
@@ -704,17 +673,10 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
 ### 3.6. CustomUserDetailsService.java
 
-> 实现 `UserDetailsService` 接口，主要功能：根据用户名查询用户信息
+> Implement the `Userdetailsservice` interface, the main function: query user information according to the user name
 
 ```java
-/**
- * <p>
- * 自定义UserDetails查询
- * </p>
- *
- * @author yangkai.shen
- * @date Created in 2018-12-10 10:29
- */
+
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
     @Autowired
@@ -729,7 +691,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String usernameOrEmailOrPhone) throws UsernameNotFoundException {
         User user = userDao.findByUsernameOrEmailOrPhone(usernameOrEmailOrPhone, usernameOrEmailOrPhone, usernameOrEmailOrPhone)
-                .orElseThrow(() -> new UsernameNotFoundException("未找到用户信息 : " + usernameOrEmailOrPhone));
+                .orElseThrow(() -> new UsernameNotFoundException("User information is not found: " + usernameOrEmailOrPhone));
         List<Role> roles = roleDao.selectByUserId(user.getId());
         List<Long> roleIds = roles.stream()
                 .map(Role::getId)
@@ -742,17 +704,10 @@ public class CustomUserDetailsService implements UserDetailsService {
 
 ### 3.7. RedisUtil.java
 
-> 主要功能：根据key的格式分页获取Redis存在的key列表
+> Main functions: Get the key list existence of Redis according to the page of the key format
 
 ```java
-/**
- * <p>
- * Redis工具类
- * </p>
- *
- * @author yangkai.shen
- * @date Created in 2018-12-11 20:24
- */
+
 @Component
 @Slf4j
 public class RedisUtil {
@@ -760,12 +715,12 @@ public class RedisUtil {
     private StringRedisTemplate stringRedisTemplate;
 
     /**
-     * 分页获取指定格式key，使用 scan 命令代替 keys 命令，在大数据量的情况下可以提高查询效率
-     *
-     * @param patternKey  key格式
-     * @param currentPage 当前页码
-     * @param pageSize    每页条数
-     * @return 分页获取指定格式key
+* Pagling to obtain the specified format Key, use the scan command instead of the keys command, which can improve the query efficiency under the situation of large data volume 
+      * 
+      * @param Patternky Key format 
+      * @param Currentpage Current Page Number 
+      * @param PageSize number per page 
+      * @Return Pagling Get the specified format key
      */
     public PageResult<String> findKeysForPage(String patternKey, int currentPage, int pageSize) {
         ScanOptions options = ScanOptions.scanOptions()
@@ -792,7 +747,7 @@ public class RedisUtil {
             cursor.close();
             RedisConnectionUtils.releaseConnection(rc, factory);
         } catch (Exception e) {
-            log.warn("Redis连接关闭异常，", e);
+            log.warn("RedisConnect to close abnormality，", e);
         }
 
         return new PageResult<>(result, tmpIndex);
@@ -802,7 +757,7 @@ public class RedisUtil {
 
 ### 3.8. MonitorService.java
 
-> 监控服务，主要功能：查询当前在线人数分页列表，手动踢出某个用户
+> Monitoring service, the main function: query the pagination list of the current online number, manually kick out a user
 
 ```java
 package com.xkcoding.rbac.security.service;
@@ -821,14 +776,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * <p>
- * 监控 Service
- * </p>
- *
- * @author yangkai.shen
- * @date Created in 2018-12-12 00:55
- */
+
 @Service
 public class MonitorService {
     @Autowired
@@ -842,14 +790,14 @@ public class MonitorService {
         List<String> rows = keys.getRows();
         Long total = keys.getTotal();
 
-        // 根据 redis 中键获取用户名列表
+ // Obtain the user list according to the key in Redis
         List<String> usernameList = rows.stream()
                 .map(s -> StrUtil.subAfter(s, Consts.REDIS_JWT_KEY_PREFIX, true))
                 .collect(Collectors.toList());
-        // 根据用户名查询用户信息
+       // Query user information according to the username
         List<User> userList = userDao.findByUsernameIn(usernameList);
 
-        // 封装在线用户信息
+       // Encourage online user information
         List<OnlineUser> onlineUserList = Lists.newArrayList();
         userList.forEach(user -> onlineUserList.add(OnlineUser.create(user)));
 
@@ -858,14 +806,13 @@ public class MonitorService {
 }
 ```
 
-### 3.9. 其余代码参见本 demo
+### 3.9. See the rest of the code 
 
-## 4. 参考
+ ## 4. Reference 
 
-1. Spring Security 官方文档：https://docs.spring.io/spring-security/site/docs/5.1.1.RELEASE/reference/htmlsingle/
-2. JWT 官网：https://jwt.io/
-3. JJWT开源工具参考：https://github.com/jwtk/jjwt#quickstart
-4. 授权部分参考官方文档：https://docs.spring.io/spring-security/site/docs/5.1.1.RELEASE/reference/htmlsingle/#authorization
+ 1. Spring Security official document: https: //docs.spring.io/spring-spring-site/docs/5.1.1.release/htmlsingle/ 
+ 2. JWT official website: https://jwt.io/ 
+ 3. JJWT open source tool Reference: https://github.com/jwtk/jjwt#quickstart 
+ 4. The authorized part of the authorized part of the official document: https://docs.spring.io/spring-spring-site/docs/5.1.1.Release/htmlsingle/#Autility 
 
-4. 动态授权部分，参考博客：https://blog.csdn.net/larger5/article/details/81063438
-
+ 4. Dynamic authorization section, refer to blog: https://blog.csdn.net/larger5/article/details/81063438

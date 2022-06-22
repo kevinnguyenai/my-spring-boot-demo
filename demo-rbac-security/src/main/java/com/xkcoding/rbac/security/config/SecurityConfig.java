@@ -19,11 +19,12 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 /**
  * <p>
- * Security 配置
+ * Security Configuration
  * </p>
  *
- * @author yangkai.shen
+ * @author yangkai.shen, kevinnguyenai
  * @date Created in 2018-12-07 16:46
+ * @updateTime Updated in 2022-06-21 14:00
  */
 @Configuration
 @EnableWebSecurity
@@ -62,70 +63,70 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         // @formatter:off
         http.cors()
-                // 关闭 CSRF
+                // closure CSRF
                 .and().csrf().disable()
-                // 登录行为由自己实现，参考 AuthController#login
+                // Login behavior is realized by yourself, refer to it AuthController#login
                 .formLogin().disable()
                 .httpBasic().disable()
 
-                // 认证请求
+                // Certification request
                 .authorizeRequests()
-                // 所有请求都需要登录访问
+                // All requests need to be logged in to access
                 .anyRequest()
                 .authenticated()
-                // RBAC 动态 url 认证
+                // RBAC dynamics url Certification
                 .anyRequest()
                 .access("@rbacAuthorityService.hasPermission(request,authentication)")
 
-                // 登出行为由自己实现，参考 AuthController#logout
+                // Realize by yourself, please refer to it AuthController#logout
                 .and().logout().disable()
-                // Session 管理
+                // Session manage
                 .sessionManagement()
-                // 因为使用了JWT，所以这里不管理Session
+                // Because of the use JWT，So do not manage here Session
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 
-                // 异常处理
+                // Abnormal treatment
                 .and().exceptionHandling().accessDeniedHandler(accessDeniedHandler);
         // @formatter:on
 
-        // 添加自定义 JWT 过滤器
+        // Add customfilterT filter
         http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
     }
 
     /**
-     * 放行所有不需要登录就可以访问的请求，参见 AuthController
-     * 也可以在 {@link #configure(HttpSecurity)} 中配置
+     * Play all requests that can be accessed without logging in, see AuthController
+     * It can also be {@link #configure(HttpSecurity)} Medium configuration
      * {@code http.authorizeRequests().antMatchers("/api/auth/**").permitAll()}
      */
     @Override
     public void configure(WebSecurity web) {
         WebSecurity and = web.ignoring().and();
 
-        // 忽略 GET
+        // neglect GET
         customConfig.getIgnores().getGet().forEach(url -> and.ignoring().antMatchers(HttpMethod.GET, url));
 
-        // 忽略 POST
+        // neglect POST
         customConfig.getIgnores().getPost().forEach(url -> and.ignoring().antMatchers(HttpMethod.POST, url));
 
-        // 忽略 DELETE
+        // neglect DELETE
         customConfig.getIgnores().getDelete().forEach(url -> and.ignoring().antMatchers(HttpMethod.DELETE, url));
 
-        // 忽略 PUT
+        // neglect PUT
         customConfig.getIgnores().getPut().forEach(url -> and.ignoring().antMatchers(HttpMethod.PUT, url));
 
-        // 忽略 HEAD
+        // neglect HEAD
         customConfig.getIgnores().getHead().forEach(url -> and.ignoring().antMatchers(HttpMethod.HEAD, url));
 
-        // 忽略 PATCH
+        // neglect PATCH
         customConfig.getIgnores().getPatch().forEach(url -> and.ignoring().antMatchers(HttpMethod.PATCH, url));
 
-        // 忽略 OPTIONS
+        // neglect OPTIONS
         customConfig.getIgnores().getOptions().forEach(url -> and.ignoring().antMatchers(HttpMethod.OPTIONS, url));
 
-        // 忽略 TRACE
+        // neglect TRACE
         customConfig.getIgnores().getTrace().forEach(url -> and.ignoring().antMatchers(HttpMethod.TRACE, url));
 
-        // 按照请求格式忽略
+        // Councing according to the request format
         customConfig.getIgnores().getPattern().forEach(url -> and.ignoring().antMatchers(url));
 
     }

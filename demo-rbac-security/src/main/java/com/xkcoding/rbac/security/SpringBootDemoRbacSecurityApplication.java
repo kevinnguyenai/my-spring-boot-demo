@@ -5,11 +5,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  * <p>
- * 启动器
+ * Launcher
  * </p>
  *
- * @author yangkai.shen
+ * @author yangkai.shen, kevinnguyenai
  * @date Created in 2018-12-10 11:28
+ * @updateTime Updated in 2022-06-21 15:00:00
  */
 @SpringBootApplication
 public class SpringBootDemoRbacSecurityApplication {

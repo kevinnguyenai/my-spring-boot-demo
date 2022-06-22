@@ -14,11 +14,12 @@ import java.io.Serializable;
 
 /**
  * <p>
- * redis配置
+ * redis Configuration
  * </p>
  *
- * @author yangkai.shen
+ * @author yangkai.shen, kevinnguyenai
  * @date Created in 2018-12-11 15:16
+ * @updateTime Updated in 2022-06-21 15:00
  */
 @Configuration
 @AutoConfigureAfter(RedisAutoConfiguration.class)
@@ -26,7 +27,8 @@ import java.io.Serializable;
 public class RedisConfig {
 
     /**
-     * 默认情况下的模板只能支持RedisTemplate<String, String>，也就是只能存入字符串，因此支持序列化
+     * By default, templates can only support RedisTemplate<String, String>，That is,
+     * it can only be stored in string, so it supports serialization
      */
     @Bean
     public RedisTemplate<String, Serializable> redisCacheTemplate(LettuceConnectionFactory redisConnectionFactory) {
