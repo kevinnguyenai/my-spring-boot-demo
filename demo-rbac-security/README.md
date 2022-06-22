@@ -30,7 +30,7 @@
  5. Use the `post` request to access`/$ {contextpath}/api/auth/login` endpoint, enter the account password, return to the token after logging in, place the obtained token in the specific request. `, Value prefix is` Bearer, add a space behind `plus token, and add the parameters of specific requests, just 
  6. enjoy ~: kissing_smiling_eyes:
 
-## 3. 部分关键代码
+## 3. Partial key code
 
 ### 3.1. pom.xml
 
